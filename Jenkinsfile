@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env groovy
+#!/usr/bin/env groovy
 
 node {
     stage('checkout') {
@@ -54,11 +54,11 @@ node {
     stage('build docker') {
         sh "cp -R src/main/docker target/"
         sh "cp target/*.war target/docker/"
-        dockerImage = docker.build('stephaneclement/devops-repo', 'target/docker')
+        dockerImage = docker.build(stephaneclement/devops-repo', 'target/docker')
     }
 
     stage('publish docker') {
-        docker.withRegistry('https://registry.hub.docker.com', 'stephaneclement') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
             dockerImage.push 'latest'
         }
     }
